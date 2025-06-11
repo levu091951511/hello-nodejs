@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Nar-Version: 1.0-SNAPSHOT
+Nar-Id: com.example.nifi.MyNifiProcessor
+Nar-Group: com.example.nifi
+

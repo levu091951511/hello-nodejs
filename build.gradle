@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.example.nifi'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly "org.apache.nifi:nifi-api:1.22.0"
+    compileOnly "org.apache.nifi:nifi-utils:1.22.0"
+    testImplementation "org.apache.nifi:nifi-mock:1.22.0"
+}
+
+jar {
+    manifest {
+        from 'src/main/resources/META-INF/MANIFEST.MF'
+    }
+}
+
+// Task to build NAR file (NiFi Archive)
+task nar(type: Jar) {
+    archiveBaseName.set("${project.name}")
+    archiveClassifier.set("nar")
+    destinationDirectory.set(file("$buildDir/libs"))
+    from sourceSets.main.output
+    dependsOn classes
+
+    manifest {
+        attributes(
+            "Nar-Id": "${project.group}.${project.name}",
+            "Nar-Group": "${project.group}",
+            "Nar-Version": "${project.version}"
+        )
+    }
+}
