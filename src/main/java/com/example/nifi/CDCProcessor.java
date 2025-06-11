@@ -23,7 +23,7 @@ import java.util.*;
 @SeeAlso({})
 @ReadsAttributes({@ReadsAttribute(attribute = "", description = "")})
 @WritesAttributes({@WritesAttribute(attribute = "", description = "")})
-public class MyProcessor extends AbstractProcessor {
+public class CDCProcessor extends AbstractProcessor {
 
     public static final PropertyDescriptor propertyDescriptor = new PropertyDescriptor
             .Builder().name("name")
